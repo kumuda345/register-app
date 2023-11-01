@@ -5,7 +5,10 @@ pipeline{
     tools {
        jdk 'jdk'
        maven 'maven'
+    }
 
+    enviroment{
+        SCANNER_HOME= tool 'sonar-scanner'
     }
     stages{
       stage ("1.Cleanup Ws") {
@@ -35,7 +38,14 @@ pipeline{
         }
         
       }
-      
+       stage ( "5.Sonar Code Analysis") {
+        steps {
+           scritp {
+               withSonarQubeEnv(credentialsId: sonar-token )
+              sh 'mvn sonar:sonar'
+           }
+        }
+       }
 
 
     }
