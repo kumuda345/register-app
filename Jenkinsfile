@@ -7,9 +7,7 @@ pipeline{
        maven 'maven'
     }
 
-    enviroment{
-        SCANNER_HOME= tool 'sonar-scanner'
-    }
+   
     stages{
       stage ("1.Cleanup Ws") {
         steps {
