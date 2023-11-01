@@ -39,7 +39,7 @@ pipeline{
        stage ( "5.Sonar Code Analysis") {
         steps {
            scritp {
-               withSonarQubeEnv(credentialsId: sonar-token )
+               withSonarQubeEnv(credentialsId: 'sonar-token' )
               sh 'mvn sonar:sonar'
            }
         }
