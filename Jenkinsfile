@@ -64,7 +64,7 @@ pipeline{
      }
      stage ( "7.Docker build and push") {
         steps {
-            script{
+            script {
                 withDockerRegistry(credentialsId: 'docker-cred') {
                 docker_image = docker.build "${IMAGE_NAME}"
             }
