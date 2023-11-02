@@ -1,4 +1,6 @@
-FROM tomcat:latest
-RUN cp -R  /usr/local/tomcat/webapps.dist/*  /usr/local/tomcat/webapps
-COPY /webapp/target/*.war /usr/local/tomcat/webapps
+FROM openjdk:11-jre-slim
+WORKDIR /app
+COPY /webapp/target/*.war /app
+EXPOSE 8081
+CMD ["java", "-jar", "your-app.jar"]
 
