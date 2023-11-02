@@ -6,6 +6,15 @@ pipeline{
        jdk 'jdk'
        maven 'maven'
     }
+    environment {
+         APP_NAME = "APP1 "
+         RELEASE_NO = " 1.0.0"
+         DOCKER_USER = "kumuda0707"
+         DOCKER_PASS = "docker-cred"
+         IMAGE_NAME = " ${DOCKER_USER}" + "/" + " ${APP_NAME}"
+         IMAGE_TAG = " ${RELEASE_NO} - ${BUILD_NUMBER}"
+        
+    }
 
    
     stages{
@@ -52,11 +61,21 @@ pipeline{
                 }   
             }
 
+     }
+     stage ( "7.Docker build and push") {
+        steps {
+            script{
+                withDockerRegistry(credentialsId: 'docker-cred') {
+                docker_image = docker.build "${IMAGE_NAME}"
+            }
+            withDockerRegistry(credentialsId: 'docker-cred') {
+                docker_image.push ("{$IMAGE_TAG}")
+                docker_image.push ('latest')
+         }
+         }
         }
-     
+      }
 
-
-    }
-
-
+        
+ }
 }
