@@ -62,18 +62,16 @@ pipeline{
             }
 
      }
-     stage ( "7.Docker build and push") {
-        steps {
-            script {
-                withDockerRegistry('',docker-cred) {
-                docker_image = docker.build "${IMAGE_NAME}"
-            }
-            withDockerRegistry('' ,docker-cred ) {
-                docker_image.push ("{$IMAGE_TAG}")
-                docker_image.push ('latest')
-         }
+      stage ( "7.Docker build and push") {
+          steps {
+              script {
+                withDockerRegistry(credentialsId: 'docker-cred') {
+                sh 'docker.build -t "${IMAGE_NAME}" . '
+                sh 'docker.push ("{$IMAGE_TAG}") '
+                        
          }
         }
+      }
       }
 
         
