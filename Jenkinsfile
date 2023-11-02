@@ -65,10 +65,10 @@ pipeline{
      stage ( "7.Docker build and push") {
         steps {
             script {
-                withDockerRegistry(credentialsId: 'docker-cred') {
+                withDockerRegistry('',docker-cred) {
                 docker_image = docker.build "${IMAGE_NAME}"
             }
-            withDockerRegistry(credentialsId: 'docker-cred') {
+            withDockerRegistry('' ,docker-cred ) {
                 docker_image.push ("{$IMAGE_TAG}")
                 docker_image.push ('latest')
          }
