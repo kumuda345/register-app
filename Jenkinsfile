@@ -67,7 +67,7 @@ pipeline{
           steps {
               script {
                 withDockerRegistry(credentialsId: 'docker-cred') {
-                sh 'docker.build -t "${IMAGE_NAME}" . '
+                sh 'docker.build -t "${IMAGE_NAME}" -f Dockerfile '
                 sh 'docker.push ("{$IMAGE_TAG}") '
                         
          }
