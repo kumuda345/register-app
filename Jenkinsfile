@@ -5,6 +5,7 @@ pipeline{
     tools {
        jdk 'jdk'
        maven 'maven'
+       docker 'docker'
     }
     environment {
          APP_NAME = "APP1 "
