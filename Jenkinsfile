@@ -54,23 +54,21 @@ pipeline{
                }
            }
          }
-     }  
-      stage("6.Quality Gate"){
+       }  
+       stage("6.Quality Gate"){
            steps {
                script {
                     waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
                 }   
             }
 
-     }
-      stage ( "7.Docker build and push") {
+       }
+        stage ( "7.Docker build and push") {
           steps {
-              script {
-                withCredentials(credentialsId: 'docker-cred') {
-                sh 'docker login -u kumuda0707 -p ${docker-cred}'  
-                sh "docker build -t "${IMAGE_NAME}" ."
-                sh "docker tag "${IMAGE_NAME}" "
-                sh "docker push "${IMAGE_NAME}" "
+               script {
+                withDockerRegistry(credentialsId: 'docker-cred') {
+                sh 'docker.build -t "${IMAGE_NAME}" . '
+                sh 'docker.push ("{$IMAGE_TAG}") '
             }
          }
        }
