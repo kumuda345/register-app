@@ -69,8 +69,8 @@ pipeline{
                 withDockerRegistry(credentialsId: 'docker-cred') {
                 sh "docker rmi  testimage3 "
                 sh "docker buildx build -t testimage3 ."
-                sh "docker tag kumuda0707/testimage3 "
-                sh "docker push kumuda0707/testimage3"
+                sh "docker tag testimage3 kumuda0707/testimage3:latest "
+                sh "docker push kumuda0707/testimage3:latest"
 
                 
             }
