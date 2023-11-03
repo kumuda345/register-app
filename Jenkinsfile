@@ -67,7 +67,7 @@ pipeline{
           steps {
                script {
                 withDockerRegistry(credentialsId: 'docker-cred') {
-                sh "docker build -t ${IMAGE_NAME} -f Dockerfile ."
+                sh "docker buildx build -t ${IMAGE_NAME} -f Dockerfile ."
                 
             }
          }
