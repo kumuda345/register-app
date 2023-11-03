@@ -65,12 +65,13 @@ pipeline{
      }
       stage ( "7.Docker build and push") {
           steps {
-              script {
-                withDockerRegistry(credentialsId: 'docker-cred') {
-                sh 'docker.build -t "${IMAGE_NAME}" -f Dockerfile '
-                sh 'docker.push ("{$IMAGE_TAG}") '
-                        
-         }
+               // Docker build with credentials
+                withCredentials([string(credentialsId: 'docker-cred', variable: 'docker-cred')]) {
+                  sh 'docker login -u kumuda0707 -p ${docker-cred}'  
+                  sh "docker build -t "${IMAGE_NAME}" ."
+                  sh "docker tag "${IMAGE_NAME}" "
+                  sh "docker push "${IMAGE_NAME}" "
+
         }
       }
       }
