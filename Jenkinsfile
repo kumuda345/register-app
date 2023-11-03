@@ -8,11 +8,11 @@ pipeline{
        
     }
     environment {
-         APP_NAME = "APP1 "
+         APP_NAME = "app1 "
          RELEASE_NO = " 1.0.0"
          DOCKER_USER = "kumuda0707"
          DOCKER_PASS = "docker-cred"
-         IMAGE_NAME = " ${DOCKER_USER}" + "/" + " ${APP_NAME}"
+         IMAGE_NAME = " ${DOCKER_USER}" +"/"+ " ${APP_NAME}"
          IMAGE_TAG = " ${RELEASE_NO} - ${BUILD_NUMBER}"
         
     }
