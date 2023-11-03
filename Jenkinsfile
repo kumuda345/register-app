@@ -67,7 +67,7 @@ pipeline{
           steps {
                script {
                 withDockerRegistry(credentialsId: 'docker-cred') {
-                sh "docker buildx build -t "${IMAGE_NAME}" ."
+                sh "docker buildx build -t "${IMAGE_NAME}:${IMAGE_TAG}" ."
                 
             }
          }
