@@ -1,6 +1,6 @@
-FROM openjdk:11-jre-slim
+FROM tomcat:9.0
 WORKDIR /app
-COPY /webapp/target/*.war /app
-EXPOSE 8081
-CMD ["java", "-jar", "your-app.jar"]
+COPY webapp/target/*.war /usr/local/tomcat/webapps/
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
 
