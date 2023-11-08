@@ -67,7 +67,7 @@ pipeline{
           steps {
                script {
                 withDockerRegistry(credentialsId: 'docker-cred') {
-                sh "docker buildx build -t ${env.IMAGE_NAME}:${env.IMAGE_TAG} ."
+                sh "docker buildx build -t ${env.IMAGE_NAME}:${env.IMAGE_TAG} -f Dockerfile ."
                 sh "docker tag ${env.IMAGE_NAME}:${env.IMAGE_TAG} ${env.DOCKER_USER}/${env.APP_NAME}:latest"
                 sh "docker push ${env.DOCKER_USER}/${env.APP_NAME}:latest"
 
