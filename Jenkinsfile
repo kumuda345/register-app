@@ -12,7 +12,7 @@ pipeline{
          RELEASE_NO = " 1.0.0"
          DOCKER_USER = "kumuda0707"
          DOCKER_PASS = "docker-cred"
-         IMAGE_NAME = " ${DOCKER_USER}"+"/"+" ${APP_NAME}"
+         IMAGE_NAME = "${DOCKER_USER}/${APP_NAME}"
          IMAGE_TAG = " ${RELEASE_NO}.${BUILD_NUMBER}"
         
     }
@@ -59,9 +59,9 @@ pipeline{
           steps {
                script {
                 withDockerRegistry(credentialsId: 'docker-cred') {
-                sh "docker buildx build -t ${env.IMAGE_NAME}:${env.IMAGE_TAG} -f Dockerfile ."
-                sh "docker tag ${env.IMAGE_NAME}:${env.IMAGE_TAG} ${env.DOCKER_USER}/${env.APP_NAME}:latest"
-                sh "docker push ${env.DOCKER_USER}/${env.APP_NAME}:latest"
+                sh "docker buildx build -t ${IMAGE_NAME}:${IMAGE_TAG} -f Dockerfile ."
+                sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:latest"
+                sh "docker push ${IMAGE_NAME}:latest"
 
                 
             }
